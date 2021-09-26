@@ -5,9 +5,14 @@ public class DictionaryManagement {
 
   /** Function insertFromCommandLine() them 1 tu vao tu dien. */
   public void insertFromCommandline() {
-    Scanner input = null;
-    input = new Scanner(System.in);
-    String anh = input.next();
-    String viet = input.next();
+    Scanner input = new Scanner(System.in);
+    // Them tinh nang nhap nhieu tu cung luc theo requirements.
+    System.out.println("Nhập số lượng từ vựng: ");
+    int numOfWords = input.nextInt();
+    for (int i = 0; i < numOfWords; i++) {
+      String eng = input.nextLine();
+      String viet = input.nextLine();
+      Dictionary.addWord(eng, viet);
+    }
   }
 }
