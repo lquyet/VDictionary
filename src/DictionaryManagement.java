@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class DictionaryManagement {
 
   /** Function insertFromCommandLine() them 1 tu vao tu dien. */
-  public void insertFromCommandline() {
+  public static void insertFromCommandline() {
     Scanner input = new Scanner(System.in);
     // Them tinh nang nhap nhieu tu cung luc theo requirements.
     System.out.println("Nhập số lượng từ vựng: ");
