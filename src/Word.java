@@ -1,8 +1,12 @@
+/**
+ * Class Word luu tru cac tu trong tu dien.
+ */
 public class Word {
-    private String word_target;
-    private String word_explain;
-    Word(String anh, String viet) {
-        word_target = anh;
-        word_explain = viet;
-    }
+  private final String wordTarget;
+  private final String wordExplain;
+
+  Word(String anh, String viet) {
+    wordTarget = anh;
+    wordExplain = viet;
+  }
 }
