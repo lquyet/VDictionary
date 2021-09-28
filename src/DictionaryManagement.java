@@ -9,6 +9,7 @@ public class DictionaryManagement {
     // Them tinh nang nhap nhieu tu cung luc theo requirements.
     System.out.println("Nhập số lượng từ vựng: ");
     int numOfWords = input.nextInt();
+    input.nextLine();
     for (int i = 0; i < numOfWords; i++) {
       String eng = input.nextLine();
       String viet = input.nextLine();
