@@ -15,4 +15,29 @@ public class DictionaryManagement {
       Dictionary.addWord(eng, viet);
     }
   }
+
+  public static void insertFromFile() {
+
+  }
+  public static void dictionaryLookup(){
+
+  }
+  public static void dictionaryAdvanced(){
+
+  }
+  public static void dictionarySearcher() {
+
+  }
+  public static void dictionaryExportToFile(){
+
+  }
+  public static void dictionaryAdd(){
+
+  }
+  public static void dictionaryChange(){
+
+  }
+  public static void dictionaryDelete(){
+
+  }
 }

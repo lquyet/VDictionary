@@ -15,7 +15,7 @@ public class DictionaryCommandLine {
     int dictionarySize = Dictionary.getSize();
     for (int i = 0; i < dictionarySize; i++) {
       Word temp = Dictionary.getWord(i);
-      System.out.println(Integer.toString(i) + "   |   "
+      System.out.format(Integer.toString(i) + "   |   "
           + temp.getEngWord() + "   |   "
           + temp.getVietWord());
     }
