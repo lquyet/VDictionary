@@ -1,0 +1,23 @@
+.root {
+
+}
+
+.label {
+
+}
+
+#paneTop {
+    -fx-background-color: #63ADDE;
+}
+#paneBot {
+    -fx-background-color: #48b151;
+}
+#paneLeft {
+    -fx-background-color: #c58a68;
+}
+#paneRight {
+    -fx-background-color: #d783da;
+}
+#paneMid {
+    -fx-background-color: #8f969b;
+}
