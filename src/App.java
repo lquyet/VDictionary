@@ -1,3 +1,5 @@
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +14,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        try {
+            Database database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dbTest\\src\\dict.db");
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.err.println("Database init failed");
+            System.exit(0);
+        }
     }
 
     @Override
