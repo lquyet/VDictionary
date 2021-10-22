@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -50,13 +51,13 @@ public class ChangeScene implements Initializable{
     /**
      * Hadling event when click CHANGE Button.
      */
-    public void changeControl() {
+    public void changeControl() throws SQLException {
         if (vieTextTo.getText() != null && vieTextTo.getText().length() > 0) {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Change Word");
             alert.setHeaderText("Do you want to change this word?");
             if (alert.showAndWait().get() == ButtonType.OK) {
-                Dictionary.changeWord(eng, vieTextTo.getText());
+                Dictionary.changeMeaning(eng, vieTextTo.getText());
                 System.out.println("Changing complete!");
                 Stage stage = (Stage) ap.getScene().getWindow();
                 stage.close();

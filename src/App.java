@@ -10,18 +10,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class App extends Application {
 
-    public static void main(String[] args) {
+public class App extends Application {
+    public static void main(String[] args) throws SQLException {
         launch(args);
-        try {
-            Database database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dbTest\\src\\dict.db");
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-            System.err.println("Database init failed");
-            System.exit(0);
-        }
     }
 
     @Override
