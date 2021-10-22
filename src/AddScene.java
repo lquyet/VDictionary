@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,7 @@ public class AddScene {
     /**
      * Handling event when click ADD Button.
      */
-    public void addControl() {
+    public void addControl() throws SQLException {
         if (engText != null && engText.getText().length() > 0) {
             String vie = Dictionary.searchWord(engText.getText());
             if (vie != null) {

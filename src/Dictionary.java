@@ -1,126 +1,69 @@
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import javax.xml.crypto.Data;
 
-/**
- * Class Dictionary luu tru cau truc trie Word.
- */
+
 public class Dictionary {
-    private static Word root = new Word();
+    public static final String UTF8_BOM = "\uFEFF"; //Since java handles BOM like other chars
+    static private Database database;
+    static {
+        try {
+      database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dict2.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    static private WordTrie trie = new WordTrie();
+    /*
+    Dictionary(String url) {
+        try {
+            database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dbTest\\src\\dict.db");
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.err.println("Database init failed");
+            System.exit(0);
+        }
+        trie = new WordTrie();
+    }
+     */
 
     /**
-     * Adding word.
+     * Adding word to trie and database.
      * @param eng eng
      * @param vie vie
      */
-    public static void addWord(String eng, String vie) {
-        root.add(eng, vie, 0);
+    public static void addWord(String eng, String vie) throws SQLException {
+        trie.insert(eng);
+        database.add(eng, vie, " ", " ");
     }
 
     /**
-     * Searching word.
+     * Get a word's meaning.
      * @param eng eng
-     * @return eng
+     * @return vietnamese word
      */
-    public static String searchWord(String eng) {
-        if (eng != null) return root.search(eng, 0);
+    public static String searchWord(String eng) throws SQLException {
+        if (trie.search(eng)) {
+            return database.getMeaning(eng);
+        }
         return null;
     }
 
     /**
-     * Deleting word.
+     * Deleting word from trie and database.
      * @param eng eng
      */
-    public static void deleteWord (String eng) {
-        root.delete(eng, 0);
-    }
-
-    /**
-     * Add word from file
-     * @param file file direction
-     * @throws IOException
-     */
-    public static void addWordFromFile(String file) throws IOException {
-        ArrayList<Pair> arr = new ArrayList<Pair>();
-
-        //read file txt
-        File myObj = new File(file);
-        Scanner myReader = new Scanner(myObj);
-
-        String eng = "";
-        String vie = "";
-        int dem = 0;
-        int d = 0;
-        while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
-            d++;
-            if (d == 1)data = data.substring(1, data.length());
-            if (data.length() > 0) {
-                if (data.charAt(0) == '@') {
-                    
-                    if (eng.length() > 0) {
-                        dem++;
-                        arr.add(new Pair(eng, vie, dem));
-                    }
-                    
-                    vie = "";
-                    eng = "";
-                    boolean dk = true;
-                    for (int i = 1; i < data.length(); ++i) {
-                        if (data.charAt(i) == '/') dk = false;
-                        if (dk) eng += data.charAt(i);
-                        else vie += data.charAt(i);
-                    }
-                    
-                    if (eng.length() > 0) {
-                        int begin = 0;
-                        while ((eng.charAt(begin) < 'a' || eng.charAt(begin) > 'z')
-                                && (eng.charAt(begin) < 'A' || eng.charAt(begin) > 'Z')) {
-                            begin++;
-                        }
-                        int last = eng.length() - 1;
-                        while ((eng.charAt(last) < 'a' || eng.charAt(last) > 'z')
-                                && (eng.charAt(last) < 'A' || eng.charAt(last) > 'Z')) {
-                            last--;
-                        }
-                        eng = eng.substring(begin, last + 1);
-                        eng = eng.toLowerCase();
-                        boolean notRequired = false;
-                        //System.out.println(eng);
-                        for (int i = 0; i < eng.length(); ++i) {
-                            if (eng.charAt(i) < 'a' || eng.charAt(i) > 'z') {
-                                if (eng.charAt(i) != ' ' && eng.charAt(i) != '-')
-                                {
-                                    notRequired = true;
-                                }
-                            }
-                        }
-                        if (notRequired) {
-                            eng = "";
-                        }
-                    }
-
-                }
-                else vie += "\n" + data;
-            }
+    public static void deleteWord (String eng) throws SQLException {
+        if (trie.search(eng)) {
+            trie.delete(trie.root, eng, 0);
+            database.delete(eng);
         }
-
-        Collections.sort(arr, Pair.PairComparator);
-        for (int i = 0; i < arr.size(); ++i) {
-            int point = i;
-            String e = arr.get(i).getEng();
-            String v = "";
-            while (point < arr.size() && arr.get(point).getEng().equals(arr.get(i).getEng())) {
-                v += '\n' + arr.get(point).getVie();
-                point++;
-            }
-            //System.out.println(v);
-            addWord(e, v);
-            i = point - 1;
-        }
-        System.out.println("Document inserted successfully");
     }
 
     /**
@@ -130,7 +73,7 @@ public class Dictionary {
      */
     public static ArrayList<String> lookUpWord(String eng) {
         if (eng != null && eng.length() > 0) {
-            return root.lookUp(eng, 0, 0);
+            return trie.getRecommendation(eng);
         }
         return null;
     }
@@ -140,7 +83,19 @@ public class Dictionary {
      * @param eng eng
      * @param vie vie
      */
-    public static void changeWord(String eng, String vie) {
-        root.change(eng, vie, 0);
+    public static void changeMeaning(String eng, String vie) throws SQLException {
+        database.delete(eng);
+        database.add(eng, vie, "a", "a");
+    }
+
+    public static void importData() throws SQLException {
+        int num = 0;
+        String word;
+        ResultSet r = database.getAllWords();
+        while (r.next() && num < 100) {
+            word = r.getString("word");
+            trie.insert(word);
+            //num++;
+        }
     }
 }

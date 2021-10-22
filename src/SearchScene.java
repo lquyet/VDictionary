@@ -1,4 +1,5 @@
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -37,8 +38,8 @@ public class SearchScene implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            Dictionary.addWordFromFile("D:\\data.txt");
-        } catch (Exception e) {
+            Dictionary.importData();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         myTranslateWord.setEditable(false);
@@ -50,7 +51,7 @@ public class SearchScene implements Initializable{
     /**
      * Searching word when click Enter or click on ListView
      */
-    public void searchWord() {
+    public void searchWord() throws SQLException {
         String eng = mySearchWord.getText();
         String vie = Dictionary.searchWord(eng);
         myTranslateWord.setText(vie);
@@ -86,7 +87,7 @@ public class SearchScene implements Initializable{
      * Handle when click on the ListView.
      * @param arg0 mouse event
      */
-    public void handleMouseClick(MouseEvent arg0) {
+    public void handleMouseClick(MouseEvent arg0) throws SQLException {
         String x = (String) myListView.getSelectionModel().getSelectedItem();
         myLabel.setText(x);
         mySearchWord.setText(x);
@@ -160,7 +161,7 @@ public class SearchScene implements Initializable{
     /**
      * Deleting the word show in label
      */
-    public void deleteWord() {
+    public void deleteWord() throws SQLException {
         if (myLabel == null || myLabel.getText().length() == 0
             || myLabel.getText() == "Can't not find this word!") {
             Alert alert = new Alert(AlertType.CONFIRMATION);
