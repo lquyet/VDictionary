@@ -9,10 +9,11 @@ import javax.xml.crypto.Data;
 
 
 public class Dictionary {
+    public static final String UTF8_BOM = "\uFEFF"; //Since java handles BOM like other chars
     static private Database database;
     static {
         try {
-      database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dict3.db");
+      database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dict2.db");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,7 +73,6 @@ public class Dictionary {
      */
     public static ArrayList<String> lookUpWord(String eng) {
         if (eng != null && eng.length() > 0) {
-            System.out.println(1);
             return trie.getRecommendation(eng);
         }
         return null;
@@ -85,16 +85,17 @@ public class Dictionary {
      */
     public static void changeMeaning(String eng, String vie) throws SQLException {
         database.delete(eng);
-        database.add(eng, vie, " ", " ");
+        database.add(eng, vie, "a", "a");
     }
 
     public static void importData() throws SQLException {
+        int num = 0;
         String word;
         ResultSet r = database.getAllWords();
-        while (r.next()) {
+        while (r.next() && num < 100) {
             word = r.getString("word");
-            System.out.println(word);
             trie.insert(word);
+            //num++;
         }
     }
 }

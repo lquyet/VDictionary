@@ -44,15 +44,15 @@ public class Database {
 
   public void add(String eng, String vie, String html, String pronounce) throws SQLException {
     String cmd = "INSERT INTO 'av' (word, html, description, pronounce)"
-        + "VALUES ("
+        + "VALUES ('"
         + eng
-        + ","
+        + "','"
         + html
-        + ","
+        + "','"
         + vie
-        + ","
+        + "','"
         + pronounce
-        +");";
+        +"');";
     runUpdate(cmd);
   }
 
@@ -74,7 +74,6 @@ public class Database {
   public ResultSet getAllWords() throws SQLException {
     String cmd = "SELECT * FROM 'av';";
     ResultSet r = runQuery(cmd);
-    System.out.println("AAAAAA");
     return r;
   }
 }

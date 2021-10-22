@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class WordTrie {
-  static final int NUM_OF_CHAR = 29; // 26 English letters + " " + "." + "-", respectively.
+
+  static final int NUM_OF_CHAR = 30; // 26 English letters + " " + "." + "-" + " ' ", respectively.
   static final int NUM_OF_RECOMMEND = 20; // recommend maximum 20 words
   // root of the trie
   public Node root;
@@ -16,6 +17,7 @@ public class WordTrie {
    * @param word
    */
   public void insert(String word) {
+    //word.replace(UTF8_BOM, "");
     int level = 0;
     int depth = word.length();
     int index;
@@ -23,9 +25,16 @@ public class WordTrie {
     Node travel = root;
 
     for (; level < depth; level++) {
-      // index = word.charAt(level) - 'a'; //get index in Node[]
+      if (word.charAt(level) == '\uFEFF') {
+        continue;
+      }
       index = formatIndex(word.charAt(level));
-      System.out.println(word.charAt(level));
+      try {
+        Node i = travel.children[index];
+      } catch (ArrayIndexOutOfBoundsException e){
+        System.out.println(word);
+        continue;
+      }
       if (travel.children[index] == null) {
         travel.children[index] = new Node();
       }
@@ -50,7 +59,7 @@ public class WordTrie {
     Node travel = root;
 
     for (; level < depth; level++) {
-      // index = word.charAt(level) - 'a';
+      index = word.charAt(level) - 'a';
       index = formatIndex(word.charAt(level));
       if (travel.children[index] == null) {
         return false;
@@ -116,8 +125,10 @@ public class WordTrie {
     } else if (c == '.') {
       // c == '.'
       return 28;
+    } else if (c == '\'') {
+      return 29;
     }
-    return (int)(c - 'a');
+    return (int)(c) - 'a';
   }
 
   private boolean hasChild(Node root) {
@@ -187,6 +198,8 @@ public class WordTrie {
       return '-';
     } else if (n == 28) {
       return '.';
+    } else if (n == 29) {
+      return '\'';
     }
     return (char) (n + 'a');
   }
@@ -205,4 +218,5 @@ public class WordTrie {
       }
     }
   }
+
 }
