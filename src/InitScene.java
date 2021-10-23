@@ -1,8 +1,6 @@
 import java.io.File;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,46 +15,46 @@ import javafx.stage.Stage;
 
 public class InitScene implements Initializable {
 
-	@FXML
-	private MediaView mediaView;
-	
-	@FXML private Button playButton;
+  @FXML private MediaView mediaView;
 
-	@FXML private ImageView gg;
-	
-	private File file;
-	private Media media;
-	private MediaPlayer mediaPlayer;
-	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		file = new File("src/video2.mp4");
-		media = new Media(file.toURI().toString());
-		mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setOnEndOfMedia(() -> {
-			mediaView.setVisible(false);
-			switchToSearchScene();
-		});
-		mediaView.setMediaPlayer(mediaPlayer);
-	}
-	
-	public void playMedia() {
-		mediaPlayer.play();
-        playButton.setVisible(false);
-		gg.setVisible(false);
-		MyThread inputData = new MyThread();
-        inputData.start();
-	}
+  @FXML private Button playButton;
 
-	public void switchToSearchScene() {
-		try{
-			Parent root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
-			Stage stage = (Stage) mediaView.getScene().getWindow();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+  @FXML private ImageView gg;
+
+  private File file;
+  private Media media;
+  private MediaPlayer mediaPlayer;
+
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+    file = new File("src/video2.mp4");
+    media = new Media(file.toURI().toString());
+    mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.setOnEndOfMedia(
+        () -> {
+          mediaView.setVisible(false);
+          switchToSearchScene();
+        });
+    mediaView.setMediaPlayer(mediaPlayer);
+  }
+
+  public void playMedia() {
+    mediaPlayer.play();
+    playButton.setVisible(false);
+    gg.setVisible(false);
+    MyThread inputData = new MyThread();
+    inputData.start();
+  }
+
+  public void switchToSearchScene() {
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
+      Stage stage = (Stage) mediaView.getScene().getWindow();
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

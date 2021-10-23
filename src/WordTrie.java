@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Trie data structure to store all words from db.
+ */
 public class WordTrie {
 
   static final int NUM_OF_CHAR = 30; // 26 English letters + " " + "." + "-" + " ' ", respectively.
@@ -12,12 +15,51 @@ public class WordTrie {
   }
 
   /**
+   * Convert char to index.
+   *
+   * @param c char to convert
+   * @return appropriate index
+   */
+  private static int formatIndex(char c) {
+    if (c == ' ') {
+      return 26;
+    } else if (c == '-') {
+      return 27;
+    } else if (c == '.') {
+      // c == '.'
+      return 28;
+    } else if (c == '\'') {
+      return 29;
+    }
+    return (int) (c) - 'a';
+  }
+
+  /**
+   * Convert index back to char.
+   *
+   * @param n index to convert
+   * @return char
+   */
+  private static char intToChar(int n) {
+    if (n == 26) {
+      return ' ';
+    } else if (n == 27) {
+      return '-';
+    } else if (n == 28) {
+      return '.';
+    } else if (n == 29) {
+      return '\'';
+    }
+    return (char) (n + 'a');
+  }
+
+  /**
    * Insert a word to trie.
    *
-   * @param word
+   * @param word English word needed to insert
    */
   public void insert(String word) {
-    //word.replace(UTF8_BOM, "");
+    // word.replace(UTF8_BOM, "");
     int level = 0;
     int depth = word.length();
     int index;
@@ -31,7 +73,7 @@ public class WordTrie {
       index = formatIndex(word.charAt(level));
       try {
         Node i = travel.children[index];
-      } catch (ArrayIndexOutOfBoundsException e){
+      } catch (ArrayIndexOutOfBoundsException e) {
         System.out.println(word);
         continue;
       }
@@ -48,8 +90,8 @@ public class WordTrie {
   /**
    * Check if a word exists in trie.
    *
-   * @param word
-   * @return
+   * @param word English word to check
+   * @return true if exists
    */
   public boolean search(String word) {
     int level = 0;
@@ -71,9 +113,10 @@ public class WordTrie {
 
   /**
    * Delete a word from trie.
-   * @param root
-   * @param word
-   * @param depth
+   *
+   * @param root root of trie
+   * @param word word to delete
+   * @param depth current depth
    */
   public void delete(Node root, String word, int depth) {
     if (root == null) {
@@ -102,8 +145,9 @@ public class WordTrie {
 
   /**
    * Change a word into another word (if exists).
-   * @param oldWord
-   * @param newWord
+   *
+   * @param oldWord old English word
+   * @param newWord new English word
    */
   public void change(String oldWord, String newWord) {
     if (search(oldWord) == true) {
@@ -112,36 +156,20 @@ public class WordTrie {
     }
   }
 
-  /**
-   * Convert char to index.
-   * @param c
-   * @return
-   */
-  private static int formatIndex(char c) {
-    if (c == ' ') {
-      return 26;
-    } else if (c == '-') {
-      return 27;
-    } else if (c == '.') {
-      // c == '.'
-      return 28;
-    } else if (c == '\'') {
-      return 29;
-    }
-    return (int)(c) - 'a';
-  }
-
   private boolean hasChild(Node root) {
     for (int i = 0; i < NUM_OF_CHAR; i++) {
-      if (root.children[i] != null) return true;
+      if (root.children[i] != null) {
+        return true;
+      }
     }
     return false;
   }
 
   /**
    * Get an ArrayList of recommendation words by its prefix.
-   * @param word
-   * @return
+   *
+   * @param word prefix word
+   * @return list of words which contain this prefix
    */
   public ArrayList<String> getRecommendation(String word) {
     ArrayList<String> rec = new ArrayList<String>();
@@ -152,6 +180,11 @@ public class WordTrie {
     Node travel = root;
     for (; level < depth; level++) {
       index = formatIndex(word.charAt(level));
+      // handle non-english char
+      // should cause ArrayIndexOutOfBound
+      if (index < 0 || index > 29) {
+        continue;
+      }
       if (travel.children[index] == null) {
         return rec;
       }
@@ -163,10 +196,11 @@ public class WordTrie {
   }
 
   /**
-   * Recursive function for getRecommendation();
-   * @param root
-   * @param rec
-   * @param currentWord
+   * Recursive function for getRecommendation().
+   *
+   * @param root root of trie
+   * @param rec the return ArrayList
+   * @param currentWord StringBuffer to build word
    */
   private void getWord(Node root, ArrayList<String> rec, StringBuffer currentWord) {
     if (root.isWord) {
@@ -186,27 +220,7 @@ public class WordTrie {
     }
   }
 
-  /**
-   * Convert index back to char.
-   * @param n
-   * @return
-   */
-  private static char intToChar(int n) {
-    if (n == 26) {
-      return ' ';
-    } else if (n == 27) {
-      return '-';
-    } else if (n == 28) {
-      return '.';
-    } else if (n == 29) {
-      return '\'';
-    }
-    return (char) (n + 'a');
-  }
-
-  /**
-   * Node of trie.
-   */
+  /** Node of trie. */
   public class Node {
     boolean isWord; // true if this node is the end of an English word
     Node[] children = new Node[NUM_OF_CHAR];
@@ -218,5 +232,4 @@ public class WordTrie {
       }
     }
   }
-
 }

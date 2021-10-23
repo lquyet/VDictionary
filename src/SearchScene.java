@@ -1,219 +1,203 @@
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class SearchScene implements Initializable{
-    @FXML
-    private TextField mySearchWord;
-    @FXML
-    private TextArea myTranslateWord;
-    @FXML
-    private ListView myListView;
-    @FXML
-    private Label myLabel;
-    @FXML
-    private AnchorPane ap;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button changeButton;
-    @FXML
-    private Button buttonUS;
-    @FXML
-    private Button buttonUK;
+/**
+ * SearchScene class for searching event.
+ */
+public class SearchScene implements Initializable {
+  @FXML private TextField mySearchWord;
+  @FXML private TextArea myTranslateWord;
+  @FXML private ListView myListView;
+  @FXML private Label myLabel;
+  @FXML private AnchorPane ap;
+  @FXML private Button deleteButton;
+  @FXML private Button changeButton;
+  @FXML private Button buttonUS;
+  @FXML private Button buttonUK;
 
-    /**
-     * Initialize when go to Search Scene.
-     */
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        myTranslateWord.setEditable(false);
-        myListView.setVisible(false);
-        myTranslateWord.setVisible(false);
-        deleteButton.setVisible(false);
-        changeButton.setVisible(false);
-        buttonUS.setVisible(false);
-        buttonUK.setVisible(false);
+  /** Initialize when go to Search Scene. */
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+    myTranslateWord.setEditable(false);
+    myListView.setVisible(false);
+    myTranslateWord.setVisible(false);
+    deleteButton.setVisible(false);
+    changeButton.setVisible(false);
+    buttonUS.setVisible(false);
+    buttonUK.setVisible(false);
+  }
+
+  /** Searching word when click Enter or click on ListView. */
+  public void searchWord() throws SQLException {
+    String eng = mySearchWord.getText();
+    String vie = Dictionary.searchWord(eng);
+    myTranslateWord.setText(vie);
+    if (vie != null) {
+      myLabel.setText(eng);
+      myTranslateWord.setVisible(true);
+      deleteButton.setVisible(true);
+      changeButton.setVisible(true);
+      buttonUS.setVisible(true);
+      buttonUK.setVisible(true);
+    } else {
+      myLabel.setText("Can't not find this word!");
+      myTranslateWord.setVisible(false);
+      deleteButton.setVisible(false);
+      changeButton.setVisible(false);
+      buttonUS.setVisible(false);
+      buttonUK.setVisible(false);
     }
+    mySearchWord.setText("");
+  }
 
-    /**
-     * Searching word when click Enter or click on ListView
-     */
-    public void searchWord() throws SQLException {
-        String eng = mySearchWord.getText();
-        String vie = Dictionary.searchWord(eng);
-        myTranslateWord.setText(vie);
-        if (vie != null) {
-            myLabel.setText(eng);
-            myTranslateWord.setVisible(true);
-            deleteButton.setVisible(true);
-            changeButton.setVisible(true);
-            buttonUS.setVisible(true);
-            buttonUK.setVisible(true);
-        }
-        else {
-            myLabel.setText("Can't not find this word!");
-            myTranslateWord.setVisible(false);
-            deleteButton.setVisible(false);
-            changeButton.setVisible(false);
-            buttonUS.setVisible(false);
-            buttonUK.setVisible(false);
-        }
-        mySearchWord.setText("");
-    }
-
-    /**
-     * look up HINT word when typing on searching bar.
-     */
-    public void lookUpWord() {        
-        mySearchWord.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.length() == 0) {
-                myListView.setVisible(false);
-            }
-            else {
-                myListView.setVisible(true);
-            }
-            myListView.getItems().clear();
-            ArrayList<String>ans = Dictionary.lookUpWord(newValue);
-            if (ans != null) {
+  /** look up HINT word when typing on searching bar. */
+  public void lookUpWord() {
+    mySearchWord
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+                myListView.setVisible(newValue != null && newValue.length() != 0);
+              myListView.getItems().clear();
+              ArrayList<String> ans = Dictionary.lookUpWord(newValue);
+              if (ans != null) {
                 myListView.getItems().addAll(ans);
                 myListView.setMaxHeight(ans.size() * 36);
-            }
-        });
+              }
+            });
+  }
+
+  /**
+   * Handle when click on the ListView.
+   *
+   * @param arg0 mouse event
+   */
+  public void handleMouseClick(MouseEvent arg0) throws SQLException {
+    String x = (String) myListView.getSelectionModel().getSelectedItem();
+    myLabel.setText(x);
+    mySearchWord.setText(x);
+    searchWord();
+  }
+
+  /** Switch to AddScene. */
+  public void addScene() {
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("AddScene.fxml"));
+
+      Scene scene = new Scene(root);
+      // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
+
+      Stage stage = new Stage();
+      stage.getIcons().add(new Image("icon.png"));
+      stage.setTitle("Adding Word");
+      stage.setScene(scene);
+
+      myLabel.setText("");
+      myTranslateWord.setText("");
+      myTranslateWord.setVisible(false);
+      deleteButton.setVisible(false);
+      changeButton.setVisible(false);
+      buttonUS.setVisible(false);
+      buttonUK.setVisible(false);
+
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
-    
-    /**
-     * Handle when click on the ListView.
-     * @param arg0 mouse event
-     */
-    public void handleMouseClick(MouseEvent arg0) throws SQLException {
-        String x = (String) myListView.getSelectionModel().getSelectedItem();
-        myLabel.setText(x);
-        mySearchWord.setText(x);
-        searchWord();
+  }
+
+  /** Switch to Change Scene. */
+  public void changeScene() {
+    if (myLabel == null
+        || myLabel.getText().length() == 0
+        || myLabel.getText() == "Can't not find this word!") {
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setTitle("Changing word");
+      alert.setHeaderText("There is no word to change!");
+
+      if (alert.showAndWait().get() == ButtonType.OK) {
+        System.out.println("Continue Searching...");
+      }
+
+      return;
+    }
+    try {
+
+      ChangeScene.changeText(myLabel.getText(), myTranslateWord.getText());
+      myLabel.setText("");
+      myTranslateWord.setText("");
+      myTranslateWord.setVisible(false);
+      deleteButton.setVisible(false);
+      changeButton.setVisible(false);
+      buttonUS.setVisible(false);
+      buttonUK.setVisible(false);
+
+      // since getClass() might be null, we should filter it like this
+      Parent root = FXMLLoader.load(
+          Objects.requireNonNull(getClass().getResource("ChangeScene.fxml")));
+
+      Scene scene = new Scene(root);
+      // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
+
+      Stage stage = new Stage();
+      stage.getIcons().add(new Image("icon.png"));
+      stage.setTitle("Change Word");
+      stage.setScene(scene);
+
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  /** Deleting the word show in label. */
+  public void deleteWord() throws SQLException {
+    if (myLabel == null
+        || myLabel.getText().length() == 0
+        || myLabel.getText() == "Can't not find this word!") {
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setTitle("Deleting word");
+      alert.setHeaderText("There is no word to delete!");
+
+      if (alert.showAndWait().get() == ButtonType.OK) {
+        System.out.println("Continue Searching...");
+      }
+
+      return;
     }
 
-    /**
-     * Switch to AddScene.
-     */
-    public void addScene() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("AddScene.fxml"));
-            
-            Scene scene = new Scene(root);
-            //scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
-            
-            Stage stage = new Stage() ;
-            stage.getIcons().add(new Image("icon.png"));
-            stage.setTitle("Adding Word");
-            stage.setScene(scene);
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Deleting word");
+    alert.setHeaderText("Do you want to DELETE" + '\"' + myLabel.getText() + "\"?");
 
-            myLabel.setText("");
-            myTranslateWord.setText("");
-            myTranslateWord.setVisible(false);
-            deleteButton.setVisible(false);
-            changeButton.setVisible(false);
-            buttonUS.setVisible(false);
-            buttonUK.setVisible(false);
-
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    if (alert.showAndWait().get() == ButtonType.OK) {
+      Dictionary.deleteWord(myLabel.getText());
+      myLabel.setText("");
+      myTranslateWord.setVisible(false);
+      deleteButton.setVisible(false);
+      changeButton.setVisible(false);
+      buttonUS.setVisible(false);
+      buttonUK.setVisible(false);
+      System.out.println("Deleting complete!");
     }
-
-    /**
-     * Switch to Change Scene.
-     */
-    public void changeScene() {
-        if (myLabel == null || myLabel.getText().length() == 0
-            || myLabel.getText() == "Can't not find this word!") {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Changing word");
-            alert.setHeaderText("There is no word to change!");
-
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                System.out.println("Continue Searching...");
-            }
-
-            return;
-        }
-        try {
-
-            ChangeScene.changeText(myLabel.getText(), myTranslateWord.getText());
-            myLabel.setText("");
-            myTranslateWord.setText("");
-            myTranslateWord.setVisible(false);
-            deleteButton.setVisible(false);
-            changeButton.setVisible(false);
-            buttonUS.setVisible(false);
-            buttonUK.setVisible(false);
-
-            Parent root = FXMLLoader.load(getClass().getResource("ChangeScene.fxml"));
-            
-            Scene scene = new Scene(root);
-            //scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
-            
-            Stage stage = new Stage() ;
-            stage.getIcons().add(new Image("icon.png"));
-            stage.setTitle("Change Word");
-            stage.setScene(scene);
-
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Deleting the word show in label
-     */
-    public void deleteWord() throws SQLException {
-        if (myLabel == null || myLabel.getText().length() == 0
-            || myLabel.getText() == "Can't not find this word!") {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Deleting word");
-            alert.setHeaderText("There is no word to delete!");
-
-            if (alert.showAndWait().get() == ButtonType.OK) {
-                System.out.println("Continue Searching...");
-            }
-
-            return;
-        }
-
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Deleting word");
-        alert.setHeaderText("Do you want to DELETE" + '\"' + myLabel.getText() + "\"?");
-
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            Dictionary.deleteWord(myLabel.getText());
-            myLabel.setText("");
-            myTranslateWord.setVisible(false);
-            deleteButton.setVisible(false);
-            changeButton.setVisible(false);
-            buttonUS.setVisible(false);
-            buttonUK.setVisible(false);
-            System.out.println("Deleting complete!");
-        }
-    }
+  }
 }
