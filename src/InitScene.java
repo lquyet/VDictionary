@@ -22,24 +22,31 @@ public class InitScene implements Initializable {
   @FXML private ImageView gg;
 
   private File file;
-  private Media media;
-  private MediaPlayer mediaPlayer;
+  private Media videoMedia;
+  private MediaPlayer videoMediaPlayer;
+  private Media musicMedia;
+	private MediaPlayer musicMediaPlayer;
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
     file = new File("src/video2.mp4");
-    media = new Media(file.toURI().toString());
-    mediaPlayer = new MediaPlayer(media);
-    mediaPlayer.setOnEndOfMedia(
+    videoMedia = new Media(file.toURI().toString());
+    videoMediaPlayer = new MediaPlayer(videoMedia);
+    videoMediaPlayer.setOnEndOfMedia(
         () -> {
           mediaView.setVisible(false);
           switchToSearchScene();
         });
-    mediaView.setMediaPlayer(mediaPlayer);
+    mediaView.setMediaPlayer(videoMediaPlayer);
+
+    file = new File("src/morningRoutine.mp3");
+    musicMedia = new Media(file.toURI().toString());
+		musicMediaPlayer = new MediaPlayer(musicMedia);
+    musicMediaPlayer.play();
   }
 
   public void playMedia() {
-    mediaPlayer.play();
+    videoMediaPlayer.play();
     playButton.setVisible(false);
     gg.setVisible(false);
     MyThread inputData = new MyThread();

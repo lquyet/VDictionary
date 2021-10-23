@@ -1,3 +1,4 @@
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 /**
@@ -34,6 +37,8 @@ public class SearchScene implements Initializable {
   @FXML private Button changeButton;
   @FXML private Button buttonUS;
   @FXML private Button buttonUK;
+  private Media musicMedia;
+	private MediaPlayer musicMediaPlayer;
 
   /** Initialize when go to Search Scene. */
   @Override
@@ -199,5 +204,13 @@ public class SearchScene implements Initializable {
       buttonUK.setVisible(false);
       System.out.println("Deleting complete!");
     }
+  }
+
+  /**voice speak when press button */
+  public void speak() {
+    File file = new File(".mp3");
+    musicMedia = new Media(file.toURI().toString());
+		musicMediaPlayer = new MediaPlayer(musicMedia);
+    musicMediaPlayer.play();
   }
 }

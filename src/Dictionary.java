@@ -14,7 +14,7 @@ public class Dictionary {
   static {
     try {
       Class.forName("org.sqlite.JDBC");
-      database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dict2.db");
+      database = new Database("jdbc:sqlite:D:\\dict.db");
     } catch (SQLException e) {
       e.printStackTrace();
     } catch (ClassNotFoundException e) {
