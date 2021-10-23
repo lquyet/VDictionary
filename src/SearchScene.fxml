@@ -3,56 +3,86 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SearchScene">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SearchScene">
    <children>
-      <ListView fx:id="myListView" layoutX="17.0" layoutY="87.0" onMouseClicked="#handleMouseClick" prefHeight="401.0" prefWidth="200.0" />
-      <TextField fx:id="mySearchWord" layoutX="17.0" layoutY="45.0" onAction="#searchWord" onKeyPressed="#lookUpWord" prefHeight="30.0" prefWidth="200.0" />
-      <Button fx:id="myAddButton" layoutX="81.0" layoutY="507.0" mnemonicParsing="false" onAction="#addScene" prefHeight="43.0" prefWidth="71.0" text="Add">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-      <TextArea fx:id="myTranslateWord" layoutX="332.0" layoutY="121.0" prefHeight="367.0" prefWidth="448.0" />
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="802.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label fx:id="myLabel" alignment="CENTER" layoutX="332.0" layoutY="45.0" prefHeight="51.0" prefWidth="448.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="myDeleteButton" layoutX="332.0" layoutY="507.0" mnemonicParsing="false" onAction="#deleteWord" text="Delete">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="myChangeButton" layoutX="685.0" layoutY="507.0" mnemonicParsing="false" onAction="#changeScene" text="Change">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
+      <BorderPane fx:id="pb" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0">
+         <top>
+            <AnchorPane fx:id="paneTop" prefHeight="166.0" prefWidth="800.0" stylesheets="@App.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="110.0" fitWidth="136.0" layoutX="36.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon2.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="mySearchWord" layoutX="294.0" layoutY="56.0" onAction="#lookUpWord" onKeyPressed="#lookUpWord" prefHeight="55.0" prefWidth="569.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Button id="button1" fx:id="searchButton" layoutX="750.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchWord" prefHeight="44.0" prefWidth="105.0" stylesheets="@App.css" text="Translate">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label id="VDictionary" layoutX="36.0" layoutY="33.0" prefHeight="102.0" prefWidth="258.0" stylesheets="@App.css" text="VDictiionary" textFill="WHITE">
+                     <font>
+                        <Font size="43.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextArea fx:id="myTranslateWord" layoutX="348.0" layoutY="31.0" prefHeight="363.0" prefWidth="480.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Label fx:id="myLabel" layoutX="26.0" layoutY="50.0" prefHeight="62.0" prefWidth="322.0" textAlignment="CENTER">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Button id="button1" fx:id="buttonUS" layoutX="26.0" layoutY="122.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" stylesheets="@App.css" text="US  ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@loa2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ListView fx:id="myListView" layoutX="295.0" layoutY="-54.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#handleMouseClick" prefHeight="459.0" prefWidth="457.0" stylesheets="@App.css" visible="false" />
+                  <Button id="button1" fx:id="deleteButton" layoutX="871.0" layoutY="299.0" mnemonicParsing="false" onAction="#deleteWord" prefHeight="47.0" prefWidth="85.0" stylesheets="@App.css" text="Delete" />
+                  <Button id="button1" layoutX="871.0" layoutY="81.0" mnemonicParsing="false" onAction="#addScene" prefHeight="47.0" prefWidth="85.0" stylesheets="@App.css" text="Add" />
+                  <Button id="button1" fx:id="changeButton" layoutX="871.0" layoutY="194.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="47.0" prefWidth="85.0" stylesheets="@App.css" text="Change" />
+                  <Button id="button1" fx:id="buttonUK" layoutX="172.0" layoutY="122.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="73.0" stylesheets="@App.css" text="UK">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@loa2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </left>
+      </BorderPane>
    </children>
 </AnchorPane>

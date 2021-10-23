@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangeScene">
+<AnchorPane id="addAp" fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@App.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChangeScene">
    <children>
-      <Label alignment="CENTER" layoutX="-6.0" layoutY="38.0" prefHeight="45.0" prefWidth="819.0" text="CHANGE WORD">
+      <Label alignment="CENTER" layoutX="-6.0" layoutY="38.0" prefHeight="45.0" prefWidth="819.0" text="CHANGE WORD" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
@@ -18,29 +18,35 @@
             <Font size="16.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="vieTextFrom" layoutX="73.0" layoutY="256.0" prefHeight="261.0" prefWidth="237.0" />
+      <TextArea fx:id="vieTextFrom" layoutX="73.0" layoutY="256.0" prefHeight="261.0" prefWidth="237.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
       <TextArea fx:id="engTextTo" layoutX="498.0" layoutY="160.0" prefHeight="72.0" prefWidth="232.0">
          <font>
             <Font size="16.0" />
          </font>
       </TextArea>
-      <TextArea fx:id="vieTextTo" layoutX="498.0" layoutY="256.0" prefHeight="261.0" prefWidth="232.0" />
-      <Label alignment="CENTER" layoutX="77.0" layoutY="110.0" prefHeight="17.0" prefWidth="232.0" text="From">
+      <TextArea fx:id="vieTextTo" layoutX="498.0" layoutY="256.0" prefHeight="261.0" prefWidth="232.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
+      <Label id="addLabel" alignment="CENTER" layoutX="77.0" layoutY="110.0" prefHeight="17.0" prefWidth="232.0" text="From">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="498.0" layoutY="110.0" prefHeight="17.0" prefWidth="232.0" text="To">
+      <Label id="addLabel" alignment="CENTER" layoutX="498.0" layoutY="110.0" prefHeight="17.0" prefWidth="232.0" text="To">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="myOKButton" layoutX="163.0" layoutY="538.0" mnemonicParsing="false" onAction="#changeControl" text="OK">
+      <Button id="button1" fx:id="myOKButton" layoutX="163.0" layoutY="538.0" mnemonicParsing="false" onAction="#changeControl" text="OK">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="myCancelButton" layoutX="574.0" layoutY="539.0" mnemonicParsing="false" onAction="#cancelControl" text="Cancel">
+      <Button id="button1" fx:id="myCancelButton" layoutX="574.0" layoutY="539.0" mnemonicParsing="false" onAction="#cancelControl" text="Cancel">
          <font>
             <Font size="20.0" />
          </font>

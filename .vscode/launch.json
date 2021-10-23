@@ -14,7 +14,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "vmArgs": "--module-path D:/Java/openjfx-17.0.0.1_windows-x64_bin-sdk/javafx-sdk-17.0.0.1/lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path D:/Java/openjfx-17.0.0.1_windows-x64_bin-sdk/javafx-sdk-17.0.0.1/lib --add-modules javafx.controls,javafx.fxml,javafx.web,javafx.media",
             "mainClass": "App",
             "projectName": "VDictionary_71b45db9"
         }

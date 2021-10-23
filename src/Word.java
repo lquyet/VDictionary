@@ -22,8 +22,11 @@ public class Word {
             if (eng.charAt(pos) == ' ') {
                 x = 26;
             }
-            if (eng.charAt(pos) == '-') {
+            else if (eng.charAt(pos) == '-') {
                 x = 27;
+            }
+            else if (x < 0 || x > 27) {
+                return;
             }
             if (childs[x] == null) {
                 childs[x] = new Word();
@@ -42,8 +45,11 @@ public class Word {
             if (eng.charAt(pos) == ' ') {
                 x = 26;
             }
-            if (eng.charAt(pos) == '-') {
+            else if (eng.charAt(pos) == '-') {
                 x = 27;
+            }
+            else if (x < 0 || x > 27) {
+                return;
             }
             childs[x].change(eng, vie, pos + 1);
         }
@@ -58,8 +64,11 @@ public class Word {
             if (eng.charAt(pos) == ' ') {
                 x = 26;
             }
-            if (eng.charAt(pos) == '-') {
+            else if (eng.charAt(pos) == '-') {
                 x = 27;
+            }
+            else if (x < 0 || x > 27) {
+                return null;
             }
             if (childs[x] == null) {
                 return null;
@@ -78,8 +87,11 @@ public class Word {
             if (eng.charAt(pos) == ' ') {
                 x = 26;
             }
-            if (eng.charAt(pos) == '-') {
+            else if (eng.charAt(pos) == '-') {
                 x = 27;
+            }
+            else if (x < 0 || x > 27) {
+                return;
             }
             childs[x].delete(eng, pos + 1);
             int dem = 0;
@@ -95,7 +107,7 @@ public class Word {
     }
 
     public ArrayList<String> lookUp(String eng, int pos, int sz) {
-        if (sz >= 20) return new ArrayList<String>();
+        if (sz >= 12) return new ArrayList<String>();
         if (pos >= eng.length()) {
             int szz = sz;
             ArrayList<String> ans = new ArrayList<>();
@@ -104,7 +116,7 @@ public class Word {
                 ans.add(this.eng);
             }
             for (int i = 0; i < 28; ++i) {
-                if (childs[i] != null && szz < 20) {
+                if (childs[i] != null && szz < 12) {
                     ArrayList<String> x = childs[i].lookUp(eng, pos + 1, szz);
                     szz += x.size();
                     ans.addAll(x);
@@ -117,10 +129,13 @@ public class Word {
             if (eng.charAt(pos) == ' ') {
                 x = 26;
             }
-            if (eng.charAt(pos) == '-') {
+            else if (eng.charAt(pos) == '-') {
                 x = 27;
             }
-            if (childs[x] == null) return null;
+            else if (x < 0 || x > 27) {
+                return new ArrayList<String>();
+            }
+            if (childs[x] == null) return new ArrayList<String>();
             return childs[x].lookUp(eng, pos + 1, 0);
         }
     }
