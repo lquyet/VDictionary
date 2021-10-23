@@ -30,12 +30,7 @@ public class InitScene implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		try {
-            Dictionary.importData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		file = new File("src/video.mp4");
+		file = new File("src/video2.mp4");
 		media = new Media(file.toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.setOnEndOfMedia(() -> {
@@ -49,6 +44,8 @@ public class InitScene implements Initializable {
 		mediaPlayer.play();
         playButton.setVisible(false);
 		gg.setVisible(false);
+		MyThread inputData = new MyThread();
+        inputData.start();
 	}
 
 	public void switchToSearchScene() {
