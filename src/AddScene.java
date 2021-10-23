@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 public class AddScene {
     @FXML TextArea engText;
+    @FXML TextArea proText;
     @FXML TextArea vieText;
     @FXML Button addButton;
     @FXML Button cancelButton;
@@ -44,6 +45,8 @@ public class AddScene {
                     alert.setHeaderText("Do you want to add this word to the dictionary?");
                     if (alert.showAndWait().get() == ButtonType.OK) {
                         System.out.println("Adding complete!");
+                        //proText.getText(); This is the text of pronounce
+                        //Below is add function
                         Dictionary.addWord(engText.getText(), vieText.getText());
                         Stage stage = (Stage) ap.getScene().getWindow();
                         stage.close();

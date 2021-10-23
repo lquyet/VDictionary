@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,21 +32,27 @@ public class SearchScene implements Initializable{
     private Label myLabel;
     @FXML
     private AnchorPane ap;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button changeButton;
+    @FXML
+    private Button buttonUS;
+    @FXML
+    private Button buttonUK;
 
     /**
      * Initialize when go to Search Scene.
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        try {
-            Dictionary.importData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         myTranslateWord.setEditable(false);
-        myTranslateWord.setMouseTransparent(true);
-        myTranslateWord.setFocusTraversable(false);
         myListView.setVisible(false);
+        myTranslateWord.setVisible(false);
+        deleteButton.setVisible(false);
+        changeButton.setVisible(false);
+        buttonUS.setVisible(false);
+        buttonUK.setVisible(false);
     }
 
     /**
@@ -57,9 +64,19 @@ public class SearchScene implements Initializable{
         myTranslateWord.setText(vie);
         if (vie != null) {
             myLabel.setText(eng);
+            myTranslateWord.setVisible(true);
+            deleteButton.setVisible(true);
+            changeButton.setVisible(true);
+            buttonUS.setVisible(true);
+            buttonUK.setVisible(true);
         }
         else {
             myLabel.setText("Can't not find this word!");
+            myTranslateWord.setVisible(false);
+            deleteButton.setVisible(false);
+            changeButton.setVisible(false);
+            buttonUS.setVisible(false);
+            buttonUK.setVisible(false);
         }
         mySearchWord.setText("");
     }
@@ -79,6 +96,7 @@ public class SearchScene implements Initializable{
             ArrayList<String>ans = Dictionary.lookUpWord(newValue);
             if (ans != null) {
                 myListView.getItems().addAll(ans);
+                myListView.setMaxHeight(ans.size() * 36);
             }
         });
     }
@@ -111,6 +129,11 @@ public class SearchScene implements Initializable{
 
             myLabel.setText("");
             myTranslateWord.setText("");
+            myTranslateWord.setVisible(false);
+            deleteButton.setVisible(false);
+            changeButton.setVisible(false);
+            buttonUS.setVisible(false);
+            buttonUK.setVisible(false);
 
             stage.show();
         } catch(Exception e) {
@@ -139,8 +162,11 @@ public class SearchScene implements Initializable{
             ChangeScene.changeText(myLabel.getText(), myTranslateWord.getText());
             myLabel.setText("");
             myTranslateWord.setText("");
-            myLabel.setText("");
-            myTranslateWord.setText("");
+            myTranslateWord.setVisible(false);
+            deleteButton.setVisible(false);
+            changeButton.setVisible(false);
+            buttonUS.setVisible(false);
+            buttonUK.setVisible(false);
 
             Parent root = FXMLLoader.load(getClass().getResource("ChangeScene.fxml"));
             
@@ -182,7 +208,11 @@ public class SearchScene implements Initializable{
         if (alert.showAndWait().get() == ButtonType.OK) {
             Dictionary.deleteWord(myLabel.getText());
             myLabel.setText("");
-            myTranslateWord.setText("");
+            myTranslateWord.setVisible(false);
+            deleteButton.setVisible(false);
+            changeButton.setVisible(false);
+            buttonUS.setVisible(false);
+            buttonUK.setVisible(false);
             System.out.println("Deleting complete!");
         }
     }

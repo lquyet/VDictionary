@@ -13,8 +13,12 @@ public class Dictionary {
     static private Database database;
     static {
         try {
-      database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dict2.db");
+        Class.forName("org.sqlite.JDBC");
+        database = new Database("jdbc:sqlite:D:\\dict.db");
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

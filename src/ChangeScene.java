@@ -34,10 +34,6 @@ public class ChangeScene implements Initializable{
         engTextFrom.setMouseTransparent(true);
         engTextFrom.setFocusTraversable(false);
 
-        engTextTo.setEditable(false);
-        engTextTo.setMouseTransparent(true);
-        engTextTo.setFocusTraversable(false);
-
         vieTextFrom.setEditable(false);
         vieTextFrom.setMouseTransparent(true);
         vieTextFrom.setFocusTraversable(false);
