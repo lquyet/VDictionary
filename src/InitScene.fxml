@@ -21,12 +21,12 @@
             <Image url="@download-unscreen.gif" />
          </image>
       </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="48.0" layoutX="21.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="disc" fitHeight="44.0" fitWidth="48.0" layoutX="21.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@disc.gif" />
          </image>
       </ImageView>
-      <Label layoutX="74.0" layoutY="552.0" prefHeight="27.0" prefWidth="181.0" text="Morning Routine.mp3">
+      <Label fx:id="discText" layoutX="74.0" layoutY="552.0" prefHeight="27.0" prefWidth="181.0" text="Morning Routine.mp3">
          <font>
             <Font size="18.0" />
          </font>

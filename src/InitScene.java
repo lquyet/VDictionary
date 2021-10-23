@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -20,6 +21,10 @@ public class InitScene implements Initializable {
   @FXML private Button playButton;
 
   @FXML private ImageView gg;
+
+  @FXML private ImageView disc;
+
+  @FXML private Label discText;
 
   private File file;
   private Media videoMedia;
@@ -36,6 +41,7 @@ public class InitScene implements Initializable {
         () -> {
           mediaView.setVisible(false);
           switchToSearchScene();
+          musicMediaPlayer.setVolume(0.2);
         });
     mediaView.setMediaPlayer(videoMediaPlayer);
 
@@ -49,6 +55,8 @@ public class InitScene implements Initializable {
     videoMediaPlayer.play();
     playButton.setVisible(false);
     gg.setVisible(false);
+    disc.setVisible(false);
+    discText.setVisible(false);
     MyThread inputData = new MyThread();
     inputData.start();
   }

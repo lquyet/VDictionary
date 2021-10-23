@@ -108,4 +108,14 @@ public class Database {
     ResultSet r = runQuery(cmd);
     return r;
   }
+
+  public String getPronounce(String eng) throws SQLException {
+    String t = "";
+    String cmd = "SELECT pronounce FROM av where word = '" + eng +"';";
+    ResultSet r = runQuery(cmd);
+    while (r.next()) {
+      t = r.getString("pronounce");
+    }
+    return t;
+  }
 }

@@ -25,9 +25,9 @@ public class AddScene {
 
   /** Handling event when click ADD Button. */
   public void addControl() throws SQLException {
-    if (engText != null && engText.getText().length() > 0) {
+    if (engText != null && engText.getText().length() > 0 && !Dictionary.filterInput(engText.getText())) {
       String vie = Dictionary.searchWord(engText.getText());
-      if (vie != null) {
+      if (!vie.isEmpty()) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Same Word");
         alert.setHeaderText(
@@ -35,7 +35,9 @@ public class AddScene {
 
         if (alert.showAndWait().get() == ButtonType.OK) {
           System.out.println("Change Scene");
-          ChangeScene.changeText(engText.getText(), Dictionary.searchWord(engText.getText()));
+          ChangeScene.changeText(engText.getText(), Dictionary.searchWord(engText.getText()), 
+          Dictionary.searchPronouce(engText.getText()));
+          
           changeScene();
           Stage stage = (Stage) ap.getScene().getWindow();
           stage.close();
@@ -62,8 +64,8 @@ public class AddScene {
       }
     } else {
       Alert alert = new Alert(AlertType.CONFIRMATION);
-      alert.setTitle("Add Word");
-      alert.setHeaderText("Please fill in English and Vietnamese");
+      alert.setTitle("Invalid Word!");
+      alert.setHeaderText("Please try again!");
       if (alert.showAndWait().get() == ButtonType.OK) {
         System.out.println("Continue Adding...");
       }

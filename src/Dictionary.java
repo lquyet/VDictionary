@@ -125,7 +125,7 @@ public class Dictionary {
    * @param newVie new Vietnamese meaning
    * @throws SQLException if fail
    */
-  public static void changeWord(String oldEng, String oldVie, String newEng, String newVie)
+  public static void changeWord(String oldEng, String oldVie, String newEng, String newVie, String pron)
       throws SQLException {
     newEng = newEng.toLowerCase();
     if (filterInput(newEng)) {
@@ -135,7 +135,7 @@ public class Dictionary {
     trie.delete(trie.root, oldEng, 0);
     trie.insert(newEng);
     database.delete(oldEng);
-    database.add(newEng, newVie, "", "");
+    database.add(newEng, newVie, "", pron);
   }
 
   /**
@@ -160,4 +160,7 @@ public class Dictionary {
     return pattern.matcher(word).find();
   }
 
+  public static String searchPronouce(String eng) throws SQLException {
+    return database.getPronounce(eng);
+  }
 }

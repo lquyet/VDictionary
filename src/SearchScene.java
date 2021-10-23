@@ -32,11 +32,11 @@ public class SearchScene implements Initializable {
   @FXML private TextArea myTranslateWord;
   @FXML private ListView myListView;
   @FXML private Label myLabel;
+  @FXML private Label myPronounceLabel;
   @FXML private AnchorPane ap;
   @FXML private Button deleteButton;
   @FXML private Button changeButton;
   @FXML private Button buttonUS;
-  @FXML private Button buttonUK;
   private Media musicMedia;
 	private MediaPlayer musicMediaPlayer;
 
@@ -49,28 +49,29 @@ public class SearchScene implements Initializable {
     deleteButton.setVisible(false);
     changeButton.setVisible(false);
     buttonUS.setVisible(false);
-    buttonUK.setVisible(false);
   }
 
   /** Searching word when click Enter or click on ListView. */
   public void searchWord() throws SQLException {
     String eng = mySearchWord.getText();
     String vie = Dictionary.searchWord(eng);
+    String pro = Dictionary.searchPronouce(eng);
     myTranslateWord.setText(vie);
-    if (vie != null) {
+    if (!vie.isEmpty()) {
       myLabel.setText(eng);
+      myPronounceLabel.setText(pro);
+      myPronounceLabel.setVisible(true); 
       myTranslateWord.setVisible(true);
       deleteButton.setVisible(true);
       changeButton.setVisible(true);
       buttonUS.setVisible(true);
-      buttonUK.setVisible(true);
     } else {
       myLabel.setText("Can't not find this word!");
+      myPronounceLabel.setVisible(false);
       myTranslateWord.setVisible(false);
       deleteButton.setVisible(false);
       changeButton.setVisible(false);
       buttonUS.setVisible(false);
-      buttonUK.setVisible(false);
     }
     mySearchWord.setText("");
   }
@@ -119,10 +120,10 @@ public class SearchScene implements Initializable {
       myLabel.setText("");
       myTranslateWord.setText("");
       myTranslateWord.setVisible(false);
+      myPronounceLabel.setVisible(false);
       deleteButton.setVisible(false);
       changeButton.setVisible(false);
       buttonUS.setVisible(false);
-      buttonUK.setVisible(false);
 
       stage.show();
     } catch (Exception e) {
@@ -147,14 +148,14 @@ public class SearchScene implements Initializable {
     }
     try {
 
-      ChangeScene.changeText(myLabel.getText(), myTranslateWord.getText());
+      ChangeScene.changeText(myLabel.getText(), myTranslateWord.getText(), myPronounceLabel.getText());
       myLabel.setText("");
       myTranslateWord.setText("");
       myTranslateWord.setVisible(false);
+      myPronounceLabel.setVisible(false);
       deleteButton.setVisible(false);
       changeButton.setVisible(false);
       buttonUS.setVisible(false);
-      buttonUK.setVisible(false);
 
       // since getClass() might be null, we should filter it like this
       Parent root = FXMLLoader.load(
@@ -198,19 +199,47 @@ public class SearchScene implements Initializable {
       Dictionary.deleteWord(myLabel.getText());
       myLabel.setText("");
       myTranslateWord.setVisible(false);
+      myPronounceLabel.setVisible(false);
       deleteButton.setVisible(false);
       changeButton.setVisible(false);
       buttonUS.setVisible(false);
-      buttonUK.setVisible(false);
       System.out.println("Deleting complete!");
     }
   }
 
   /**voice speak when press button */
   public void speak() {
-    File file = new File(".mp3");
+    Translator.textToSpeech(myLabel.getText());
+    File file = new File("sound.mp3");
     musicMedia = new Media(file.toURI().toString());
 		musicMediaPlayer = new MediaPlayer(musicMedia);
     musicMediaPlayer.play();
+  }
+
+  /**switch to search paragraph scene */
+  public void searchParagraph() {
+    try {
+      Parent root = FXMLLoader.load(getClass().getResource("SearchParagraph.fxml"));
+
+      Scene scene = new Scene(root);
+      // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
+
+      Stage stage = new Stage();
+      stage.getIcons().add(new Image("icon.png"));
+      stage.setTitle("Search Paragraph");
+      stage.setScene(scene);
+
+      myLabel.setText("");
+      myTranslateWord.setText("");
+      myTranslateWord.setVisible(false);
+      myPronounceLabel.setVisible(false);
+      deleteButton.setVisible(false);
+      changeButton.setVisible(false);
+      buttonUS.setVisible(false);
+
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
