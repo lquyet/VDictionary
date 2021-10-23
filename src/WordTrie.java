@@ -71,10 +71,7 @@ public class WordTrie {
         continue;
       }
       index = formatIndex(word.charAt(level));
-      try {
-        Node i = travel.children[index];
-      } catch (ArrayIndexOutOfBoundsException e) {
-        System.out.println(word);
+      if (index < 0 || index > 29) {
         continue;
       }
       if (travel.children[index] == null) {
@@ -183,7 +180,8 @@ public class WordTrie {
       // handle non-english char
       // should cause ArrayIndexOutOfBound
       if (index < 0 || index > 29) {
-        continue;
+        rec.clear();
+        return rec;
       }
       if (travel.children[index] == null) {
         return rec;
@@ -203,6 +201,10 @@ public class WordTrie {
    * @param currentWord StringBuffer to build word
    */
   private void getWord(Node root, ArrayList<String> rec, StringBuffer currentWord) {
+    if (currentWord.isEmpty()) {
+      return;
+    }
+
     if (root.isWord) {
       rec.add(currentWord.toString());
     }
