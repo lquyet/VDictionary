@@ -19,7 +19,7 @@ public class Dictionary {
   static {
     try {
       Class.forName("org.sqlite.JDBC");
-      database = new Database("jdbc:sqlite:D:\\dict.db");
+      database = new Database("jdbc:sqlite:.\\dict.db");
     } catch (SQLException e) {
       e.printStackTrace();
     } catch (ClassNotFoundException e) {
@@ -27,19 +27,6 @@ public class Dictionary {
       e.printStackTrace();
     }
   }
-  /*
-  Dictionary(String url) {
-      try {
-          database = new Database("jdbc:sqlite:C:\\Users\\anhqu\\Desktop\\dbTest\\src\\dict.db");
-      }
-      catch (SQLException throwables) {
-          throwables.printStackTrace();
-          System.err.println("Database init failed");
-          System.exit(0);
-      }
-      trie = new WordTrie();
-  }
-   */
 
   /**
    * Adding word to trie and database.
