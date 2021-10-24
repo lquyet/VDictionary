@@ -1,0 +1,88 @@
+.root {
+
+}
+
+.label {
+
+}
+
+#paneTop {
+  -fx-background-color: #4996c9;
+}
+
+#button1:hover {
+  -fx-background-color: #92c4dd;
+  -fx-border-color: #265e83;
+  -fx-border-width: 2;
+}
+
+#button1 {
+  -fx-font-family: Arial, Helvetica, sans-serif;
+  -fx-font-weight: bold;
+  -fx-font-size: 17px;
+  -fx-background-color: #265e83;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+  -fx-text-alignment: center;
+}
+
+#button1:pressed {
+  -fx-scale-y: 0.9;
+  -fx-scale-x: 0.9;
+}
+
+#button2:hover {
+  -fx-background-color:rgb(29, 128, 158);
+}
+
+#button2 {
+  -fx-font-family: Arial, Helvetica, sans-serif;
+  -fx-font-weight: bold;
+  -fx-font-size: 17px;
+  -fx-background-color: transparent;
+  -fx-text-fill: black;
+  -fx-text-alignment: center;
+  -fx-border-color: black;
+  -fx-border-width: 2;
+}
+
+#button2:pressed {
+  -fx-scale-y: 0.9;
+  -fx-scale-x: 0.9;
+}
+
+#myListView {
+  -fx-font-size: 17px;
+  -fx-text-fill: white;
+}
+
+#button3 {
+  -fx-background-color: transparent;
+}
+
+.list-view .list-cell:odd {
+  -fx-background-color: #2f8bc9;
+  -fx-text-fill: white;
+}
+
+.list-view .list-cell:even {
+  -fx-background-color: #245f86;
+  -fx-text-fill: white;
+}
+
+#addAp {
+  -fx-background-color: #80afce;
+}
+
+#addLabel {
+  -fx-text-fill: white;
+  -fx-font-family: Arial, Helvetica, sans-serif;
+  -fx-font-weight: bold;
+  -fx-font-size: 17px;
+}
+
+#VDictionary {
+  -fx-text-fill: white;
+  -fx-font-family: Arial, Helvetica, sans-serif;
+  -fx-font-weight: bold;
+}
