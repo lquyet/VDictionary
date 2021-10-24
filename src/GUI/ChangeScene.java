@@ -1,10 +1,10 @@
-package Frontend;
+package GUI;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import Backend.Core.Dictionary;
+import Client.Core.Dictionary;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;

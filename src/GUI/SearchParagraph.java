@@ -1,8 +1,8 @@
-package Frontend;
+package GUI;
 
 import java.io.IOException;
 
-import Backend.API.Translator;
+import Client.API.Translator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

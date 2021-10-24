@@ -1,4 +1,4 @@
-package Backend.Core;
+package Client.Core;
 
 import java.util.ArrayList;
 

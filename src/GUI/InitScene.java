@@ -1,4 +1,4 @@
-package Frontend;
+package GUI;
 
 import java.io.File;
 import java.net.URL;
@@ -36,7 +36,7 @@ public class InitScene implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    file = new File("src/Frontend/imagesAndVideos/video2.mp4");
+    file = new File("src/GUI/asserts/video2.mp4");
     videoMedia = new Media(file.toURI().toString());
     videoMediaPlayer = new MediaPlayer(videoMedia);
     videoMediaPlayer.setOnEndOfMedia(
@@ -47,7 +47,7 @@ public class InitScene implements Initializable {
         });
     mediaView.setMediaPlayer(videoMediaPlayer);
 
-    file = new File("src/Frontend/imagesAndVideos/morningRoutine.mp3");
+    file = new File("src/GUI/asserts/morningRoutine.mp3");
     musicMedia = new Media(file.toURI().toString());
 		musicMediaPlayer = new MediaPlayer(musicMedia);
     musicMediaPlayer.play();
@@ -59,7 +59,7 @@ public class InitScene implements Initializable {
     gg.setVisible(false);
     disc.setVisible(false);
     discText.setVisible(false);
-    MyThread inputData = new MyThread();
+    LoadDbThread inputData = new LoadDbThread();
     inputData.start();
   }
 

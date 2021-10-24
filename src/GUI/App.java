@@ -1,4 +1,4 @@
-package Frontend;
+package GUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +26,7 @@ public class App extends Application {
       Scene scene = new Scene(root);
       scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
 
-      primaryStage.getIcons().add(new Image("Frontend/imagesAndVideos/icon.png"));
+      primaryStage.getIcons().add(new Image("GUI/asserts/icon.png"));
       primaryStage.setTitle("VDictionary");
       primaryStage.setScene(scene);
       primaryStage.show();

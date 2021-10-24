@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.SearchScene">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchScene">
    <children>
       <BorderPane fx:id="pb" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0">
          <top>
@@ -19,7 +19,7 @@
                <children>
                   <ImageView fitHeight="110.0" fitWidth="136.0" layoutX="36.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@imagesAndVideos/icon2.png" />
+                        <Image url="@asserts/icon2.png" />
                      </image>
                   </ImageView>
                   <TextField fx:id="mySearchWord" layoutX="294.0" layoutY="56.0" onAction="#lookUpWord" onKeyPressed="#lookUpWord" prefHeight="55.0" prefWidth="569.0">
@@ -60,7 +60,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@imagesAndVideos/loa2.png" />
+                              <Image url="@asserts/loa2.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>

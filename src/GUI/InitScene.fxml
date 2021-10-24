@@ -9,7 +9,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@App.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.InitScene">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@App.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.InitScene">
    <padding>
       <Insets right="10.0" />
    </padding>
@@ -18,12 +18,12 @@
       <Button id="button2" fx:id="playButton" layoutX="795.0" layoutY="55.0" mnemonicParsing="false" onAction="#playMedia" prefHeight="53.0" prefWidth="91.0" stylesheets="@App.css" text="Read" />
       <ImageView fx:id="gg" fitHeight="238.0" fitWidth="308.0" layoutX="199.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@imagesAndVideos/coffee.gif" />
+            <Image url="@asserts/coffee.gif" />
          </image>
       </ImageView>
       <ImageView fx:id="disc" fitHeight="44.0" fitWidth="48.0" layoutX="21.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@imagesAndVideos/disc.gif" />
+            <Image url="@asserts/disc.gif" />
          </image>
       </ImageView>
       <Label fx:id="discText" layoutX="74.0" layoutY="552.0" prefHeight="27.0" prefWidth="181.0" text="Morning Routine.mp3">

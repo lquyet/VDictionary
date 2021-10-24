@@ -1,4 +1,4 @@
-package Frontend;
+package GUI;
 
 import java.io.File;
 import java.net.URL;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import Backend.API.Translator;
-import Backend.Core.Dictionary;
+import Client.API.Translator;
+import Client.Core.Dictionary;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -118,7 +118,7 @@ public class SearchScene implements Initializable {
       // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
 
       Stage stage = new Stage();
-      stage.getIcons().add(new Image("Frontend/imagesAndVideos/icon.png"));
+      stage.getIcons().add(new Image("GUI/asserts/icon.png"));
       stage.setTitle("Adding Word");
       stage.setScene(scene);
 
@@ -170,7 +170,7 @@ public class SearchScene implements Initializable {
       // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
 
       Stage stage = new Stage();
-      stage.getIcons().add(new Image("Frontend/imagesAndVideos/icon.png"));
+      stage.getIcons().add(new Image("GUI/asserts/icon.png"));
       stage.setTitle("Change Word");
       stage.setScene(scene);
 
@@ -230,7 +230,7 @@ public class SearchScene implements Initializable {
       // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
 
       Stage stage = new Stage();
-      stage.getIcons().add(new Image("Frontend/imagesAndVideos/icon.png"));
+      stage.getIcons().add(new Image("GUI/asserts/icon.png"));
       stage.setTitle("Search Paragraph");
       stage.setScene(scene);
 

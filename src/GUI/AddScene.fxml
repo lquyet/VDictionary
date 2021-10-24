@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="addAp" fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@App.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.AddScene">
+<AnchorPane id="addAp" fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@App.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddScene">
   <children>
     <Button id="button1" fx:id="addButton" layoutX="51.0" layoutY="530.0" mnemonicParsing="false" onAction="#addControl" prefHeight="38.0" prefWidth="90.0" text="Add" />
     <Button id="button1" fx:id="cancelButton" layoutX="266.0" layoutY="530.0" mnemonicParsing="false" onAction="#cancelControl" prefHeight="38.0" prefWidth="83.0" text="Cancel" />

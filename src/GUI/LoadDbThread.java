@@ -1,13 +1,13 @@
-package Frontend;
+package GUI;
 
 import java.sql.SQLException;
 
-import Backend.Core.Dictionary;
+import Client.Core.Dictionary;
 
 /**
  * Multi-threading to load data while playing intro video.
  */
-public class MyThread extends Thread {
+public class LoadDbThread extends Thread {
   @Override
   public void run() {
     try {

@@ -1,8 +1,8 @@
-package Frontend;
+package GUI;
 
 import java.sql.SQLException;
 
-import Backend.Core.Dictionary;
+import Client.Core.Dictionary;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -98,7 +98,7 @@ public class AddScene {
       // scene.getStylesheets().add(getClass().getResource("App.css").toExternalForm());
 
       Stage stage = new Stage();
-      stage.getIcons().add(new Image("Frontend/imagesAndVideos/icon.png"));
+      stage.getIcons().add(new Image("GUI/asserts/icon.png"));
       stage.setTitle("Change Word");
       stage.setScene(scene);
       stage.show();

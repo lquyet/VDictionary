@@ -1,4 +1,4 @@
-package Backend.API;
+package Client.API;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
